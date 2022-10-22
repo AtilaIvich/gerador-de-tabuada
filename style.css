@@ -1,0 +1,199 @@
+@charset "utf-8";
+
+@font-face {
+    font-family: pixelFont;
+    src: url(font/pixel.ttf) format('truetype');
+}
+
+:root {
+    --azulEscuro: #0367A6;
+    --branco: white;
+    --amarelo: #f2bc27;
+    --azul: #049DBF;
+}
+
+/*
+--cinza: #D9D9D9;
+--azul: #049DBF;
+*/
+
+/* Entrada do jogo */
+
+#telaInicial {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: var(--azulEscuro);
+    z-index: 3;
+}
+
+#botaoIniciar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px 20px;
+    font-family: pixelFont;
+    font-size: 1.2em;
+    background-color: var(--azulEscuro);
+    color: var(--branco);
+    border: none;
+    outline: none;
+}
+
+#botaoIniciar:hover, #botaoIniciar:active {
+    color: var(--amarelo);
+}
+
+/* Jogo iniciado */
+
+body {
+    background-color: var(--azulEscuro);
+    font-family: pixelFont;
+    color: var(--azul);
+    text-align: center;
+    user-select: none;
+}
+
+main {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(300px, 50%, 700px);
+    margin-top: 20px;
+    background-color: var(--branco);
+    padding: 30px 10px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    z-index: 2;
+}
+
+#containerConta {
+    margin-bottom: 20px;
+}
+
+#resultadoUsuario {
+    font-family: pixelFont;
+    color: var(--azul);
+    background-color: var(--branco);
+    width: 1.5em;
+    border: 2px solid var(--azul);
+    border-width: 0 0 2px 0;
+    user-select: all;
+    font-size: 1em;
+    line-height: 1em;
+    user-select: contain;
+}
+
+#resultadoUsuario:focus {
+    outline: none;
+}
+
+#botaoEnviar {
+    font-family: pixelFont;
+    background-color: var(--branco);
+    border: none;
+    outline: none;
+}
+
+#botaoEnviar:hover, #botaoEnviar:active {
+    color: var(--amarelo);
+}
+
+.num {
+    display: inline-block;
+    font-size: 1.5em;
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.num:hover {
+    background-color: rgb(247, 247, 247);
+}
+
+.num:active {
+    background-color: var(--azulEscuro);
+}
+
+.numFake:hover, .numFake:active {
+    background-color: var(--branco);
+}
+
+#num0 {
+    margin: 0;
+}
+
+#linha4 {
+    margin-bottom: 20px;
+}
+
+.contador {
+    display: inline-block;
+    padding: 0 5px;
+    color: var(--amarelo);
+}
+
+/*Tela de derrota*/
+
+#telaDerrota {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--azulEscuro);
+    display: none;
+    z-index: 3;
+}
+
+#retorno {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+#containerBotoesDerrota {
+    position: absolute;
+    top: calc(40% + 100px);
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#containerBotoesDerrota button {
+    font-family: pixelFont;
+    background-color: var(--azulEscuro);
+    color: white;
+    border: none;
+    outline: none;
+    font-size: 1.2em;
+}
+
+#containerBotoesDerrota button:hover {
+    color: var(--amarelo);
+}
+
+#telaTriste {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--azulEscuro);
+    display: none;
+    z-index: 4;
+}
+
+#carinhaTriste {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--amarelo);
+    font-size: 4em;
+}
