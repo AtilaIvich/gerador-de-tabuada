@@ -22,7 +22,7 @@
     height: 100%;
     display: block;
     background-color: var(--azulEscuro);
-    z-index: 3;
+    z-index: 1;
 }
 
 #botaoIniciar {
@@ -30,11 +30,11 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 10px 20px;
-    font-family: pixelFont;
-    font-size: 1.2em;
     background-color: var(--azulEscuro);
     color: var(--branco);
+    font-family: pixelFont, 'Courier New', Courier, monospace;
+    font-size: 1.2em;
+    padding: 10px 20px;
     border: none;
     outline: none;
 }
@@ -47,8 +47,8 @@
 
 body {
     background-color: var(--azulEscuro);
-    font-family: pixelFont;
     color: var(--azul);
+    font-family: pixelFont, 'Courier New', Courier, monospace;
     text-align: center;
     user-select: none;
 }
@@ -60,11 +60,11 @@ main {
     transform: translate(-50%, -50%);
     width: clamp(300px, 50%, 700px);
     margin-top: 20px;
-    background-color: var(--branco);
     padding: 30px 10px;
+    background-color: var(--branco);
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
-    z-index: 2;
+    z-index: 0;
 }
 
 #containerConta {
@@ -72,16 +72,14 @@ main {
 }
 
 #resultadoUsuario {
-    font-family: pixelFont;
-    color: var(--azul);
-    background-color: var(--branco);
-    width: 1.5em;
-    border: 2px solid var(--azul);
-    border-width: 0 0 2px 0;
-    user-select: all;
+    font-family: pixelFont, 'Courier New', Courier, monospace;
     font-size: 1em;
     line-height: 1em;
-    user-select: contain;
+    width: 1.5em;
+    background-color: var(--branco);
+    color: var(--azul);
+    border: 2px solid var(--azul);
+    border-width: 0 0 2px 0;
 }
 
 #resultadoUsuario:focus {
@@ -89,7 +87,7 @@ main {
 }
 
 #botaoEnviar {
-    font-family: pixelFont;
+    font-family: pixelFont, 'Courier New', Courier, monospace;
     background-color: var(--branco);
     border: none;
     outline: none;
@@ -111,7 +109,7 @@ main {
 }
 
 .num:active {
-    background-color: var(--azulEscuro);
+    background-color: rgb(237, 237, 237);
 }
 
 #numFake {
@@ -142,7 +140,7 @@ main {
     height: 100%;
     background-color: var(--azulEscuro);
     display: none;
-    z-index: 3;
+    z-index: 2;
 }
 
 #retorno {
@@ -162,12 +160,16 @@ main {
 }
 
 #containerBotoesDerrota button {
-    font-family: pixelFont;
+    font-family: pixelFont, 'Courier New', Courier, monospace;
+    font-size: 1.2em;
     background-color: var(--azulEscuro);
     color: white;
     border: none;
     outline: none;
-    font-size: 1.2em;
+}
+
+#botaoJogarNovamente, #botaoPararJogo {
+    margin: 0 5px;
 }
 
 #containerBotoesDerrota button:hover {
@@ -182,7 +184,7 @@ main {
     height: 100%;
     background-color: var(--azulEscuro);
     display: none;
-    z-index: 4;
+    z-index: 3;
 }
 
 #carinhaTriste {

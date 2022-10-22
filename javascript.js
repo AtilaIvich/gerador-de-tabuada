@@ -60,7 +60,7 @@ function iniciar() {
     botaoEnviar.addEventListener('click', enviar);
     document.addEventListener('keypress', apertouEnter);
     contadorTempo = setInterval(atualizarTempo, 1000);
-    resultadoUsuario.focus();
+    if (!ehMobile) resultadoUsuario.focus();
     gerarConta();
 }
 
@@ -86,7 +86,7 @@ function enviar() {
         atualizarMultiplicador();
         atualizarPontos();
         resultadoUsuario.value = '';
-        resultadoUsuario.focus();
+        if (!ehMobile) resultadoUsuario.focus();
         gerarConta();
     } else {
         terminarPartida();
@@ -136,7 +136,7 @@ function terminarPartida() {
         retorno.innerHTML += `PONTUACAO: ${pontos} PONTOS<br><br>`;
     } else {
         retorno.innerHTML += novoRecorde
-        ? `PONTUACAO: ${pontos} PONTOS<br><span style="color: var(--amarelo); font-size: 1.2em">NOVO RECORDE!</span><br><br>`
+        ? `PONTUACAO: ${pontos} PONTOS<br><span style="color: var(--amarelo);">NOVO RECORDE!</span><br><br>`
         : `PONTUACAO: ${pontos} PONTOS<br>RECORDE: ${recorde} PONTOS<br><br>`;
     }
 
@@ -164,10 +164,14 @@ function jogarNovamente() {
     botaoEnviar.addEventListener('click', enviar);
     document.addEventListener('keypress', apertouEnter);
     contadorTempo = setInterval(atualizarTempo, 1000);
-    resultadoUsuario.focus();
+    if (!ehMobile) resultadoUsuario.focus();
     gerarConta();
 }
 
 function pararJogo() {
    telaTriste.style.display = 'block';
+}
+
+function ehMobile() {
+    return "ontouchstart" in botaoIniciar;
 }
