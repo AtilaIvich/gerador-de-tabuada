@@ -40,6 +40,8 @@ const botaoJogarNovamente = document.getElementById('botaoJogarNovamente');
 const botaoPararJogo = document.getElementById('botaoPararJogo');
 const telaTriste = document.getElementById('telaTriste');
 
+let primeiraPartida = true;
+let novoRecorde = false;
 let questaoAtual = 1;
 let pontos = 0;
 let recorde = 0;
@@ -62,9 +64,10 @@ function iniciar() {
     gerarConta();
 }
 
+let valorMax = 10;
 function gerarConta() {
-    let valorAleatorio1 = Math.round(Math.random() * 10);
-    let valorAleatorio2 = Math.round(Math.random() * 10);
+    let valorAleatorio1 = Math.round(Math.random() * valorMax);
+    let valorAleatorio2 = Math.round(Math.random() * valorMax);
     resultadoCorreto = valorAleatorio1 * valorAleatorio2;
 
     valor1.innerText = valorAleatorio1;
@@ -87,7 +90,6 @@ function enviar() {
         gerarConta();
     } else {
         terminarPartida();
-        resultadoUsuario.value = '';
     }
 }
 
@@ -100,7 +102,10 @@ function atualizarPontos() {
     pontos += 3 * valorMultiplicador;
     placar.innerText = pontos;
 
-    if (pontos > recorde) recorde = pontos;
+    if (pontos > recorde) {
+        recorde = pontos;
+        novoRecorde = true;
+    }
 }
 
 function atualizarTempo() {
@@ -121,11 +126,21 @@ function terminarPartida() {
     botaoEnviar.removeEventListener('click', enviar);
     document.removeEventListener('keypress', apertouEnter);
     clearInterval(contadorTempo);
+    resultadoUsuario.value = '';
 
     retorno.innerHTML = tempoRestante <= 0
     ? `O SEU TEMPO ACABOU<br>`
     : `VOCE ERROU A CONTA ${valor1.innerText} x ${valor2.innerText}<br>`;
-    retorno.innerHTML += `PONTUACAO: ${pontos} PONTOS<br>RECORDE: ${recorde} PONTOS<br><br>DESEJA JOGAR NOVAMENTE?`;
+
+    if (primeiraPartida === true) {
+        retorno.innerHTML += `PONTUACAO: ${pontos} PONTOS<br><br>`;
+    } else {
+        retorno.innerHTML += novoRecorde
+        ? `PONTUACAO: ${pontos} PONTOS<br><span style="color: var(--amarelo); font-size: 1.2em">NOVO RECORDE!</span><br><br>`
+        : `PONTUACAO: ${pontos} PONTOS<br>RECORDE: ${recorde} PONTOS<br><br>`;
+    }
+
+    retorno.innerHTML += `DESEJA JOGAR NOVAMENTE?`;
     telaDerrota.style.display = 'block';
 
     botaoJogarNovamente.addEventListener('click', jogarNovamente);
@@ -136,6 +151,8 @@ function jogarNovamente() {
     telaDerrota.style.display = 'none';
     retorno.innerHTML = '';
 
+    novoRecorde = false;
+    primeiraPartida = false;
     questaoAtual = 1;
     pontos = 0;
     valorMultiplicador = 1;

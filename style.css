@@ -151,11 +151,12 @@ main {
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
+    white-space: nowrap;
 }
 
 #containerBotoesDerrota {
     position: absolute;
-    top: calc(40% + 100px);
+    top: calc(40% + 125px);
     left: 50%;
     transform: translate(-50%, -50%);
 }
