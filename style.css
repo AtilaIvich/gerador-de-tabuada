@@ -6,16 +6,11 @@
 }
 
 :root {
-    --azulEscuro: #0367A6;
-    --branco: white;
+    --azulEscuro: #485DD9;
+    --azul: #5068F2;
     --amarelo: #f2bc27;
-    --azul: #049DBF;
+    --branco: white;
 }
-
-/*
---cinza: #D9D9D9;
---azul: #049DBF;
-*/
 
 /* Entrada do jogo */
 
@@ -119,12 +114,12 @@ main {
     background-color: var(--azulEscuro);
 }
 
-.numFake:hover, .numFake:active {
-    background-color: var(--branco);
-}
-
-#num0 {
-    margin: 0;
+#numFake {
+    display: inline-block;
+    font-size: 1.5em;
+    width: 1.5em;
+    height: 1.5em;
+    color: rgb(226, 226, 226)
 }
 
 #linha4 {

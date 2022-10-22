@@ -20,6 +20,7 @@ const num7 = document.getElementById('num7');
 const num8 = document.getElementById('num8');
 const num9 = document.getElementById('num9');
 const num0 = document.getElementById('num0');
+const backspace = document.getElementById('backspace');
 
 num1.addEventListener('click', () => digitar(1));
 num2.addEventListener('click', () => digitar(2));
@@ -31,6 +32,7 @@ num7.addEventListener('click', () => digitar(7));
 num8.addEventListener('click', () => digitar(8));
 num9.addEventListener('click', () => digitar(9));
 num0.addEventListener('click', () => digitar(0));
+backspace.addEventListener('click', () => digitar('x'));
 
 const telaDerrota = document.getElementById('telaDerrota');
 const retorno = document.getElementById('retorno');
@@ -40,9 +42,11 @@ const telaTriste = document.getElementById('telaTriste');
 
 let questaoAtual = 1;
 let pontos = 0;
+let recorde = 0;
 let valorMultiplicador = 1;
 let resultadoCorreto = undefined;
-let tempoRestante = 10;
+let tempoPadrao = 10;
+let tempoRestante = tempoPadrao;
 let contadorTempo;
 let apertouEnter = (e) => {
     if (e.key === 'Enter') enviar();
@@ -54,6 +58,7 @@ function iniciar() {
     botaoEnviar.addEventListener('click', enviar);
     document.addEventListener('keypress', apertouEnter);
     contadorTempo = setInterval(atualizarTempo, 1000);
+    resultadoUsuario.focus();
     gerarConta();
 }
 
@@ -67,7 +72,8 @@ function gerarConta() {
 }
 
 function digitar(i) {
-    resultadoUsuario.value += i;
+    if (i === 'x') resultadoUsuario.value = resultadoUsuario.value.slice(0, -1);
+    else resultadoUsuario.value += i;
 }
 
 function enviar() {
@@ -93,6 +99,8 @@ function atualizarMultiplicador() {
 function atualizarPontos() {
     pontos += 3 * valorMultiplicador;
     placar.innerText = pontos;
+
+    if (pontos > recorde) recorde = pontos;
 }
 
 function atualizarTempo() {
@@ -106,7 +114,7 @@ function atualizarTempo() {
         tempo.innerText = s > 9? `0${min}:${s}` : `0${min}:0${s}`;
     }
 
-    if (tempoRestante === 0) terminarPartida();
+    if (tempoRestante <= 0) terminarPartida();
 }
 
 function terminarPartida() {
@@ -114,10 +122,10 @@ function terminarPartida() {
     document.removeEventListener('keypress', apertouEnter);
     clearInterval(contadorTempo);
 
-    retorno.innerHTML = tempoRestante === 0
+    retorno.innerHTML = tempoRestante <= 0
     ? `O SEU TEMPO ACABOU<br>`
     : `VOCE ERROU A CONTA ${valor1.innerText} x ${valor2.innerText}<br>`;
-    retorno.innerHTML += `PONTUACAO: ${pontos} PONTOS<br><br>DESEJA JOGAR NOVAMENTE?`;
+    retorno.innerHTML += `PONTUACAO: ${pontos} PONTOS<br>RECORDE: ${recorde} PONTOS<br><br>DESEJA JOGAR NOVAMENTE?`;
     telaDerrota.style.display = 'block';
 
     botaoJogarNovamente.addEventListener('click', jogarNovamente);
@@ -131,7 +139,7 @@ function jogarNovamente() {
     questaoAtual = 1;
     pontos = 0;
     valorMultiplicador = 1;
-    tempoRestante = 10;
+    tempoRestante = tempoPadrao;
 
     placar.innerText = pontos;
     multiplicador.innerText = valorMultiplicador;
@@ -139,7 +147,7 @@ function jogarNovamente() {
     botaoEnviar.addEventListener('click', enviar);
     document.addEventListener('keypress', apertouEnter);
     contadorTempo = setInterval(atualizarTempo, 1000);
-    
+    resultadoUsuario.focus();
     gerarConta();
 }
 
