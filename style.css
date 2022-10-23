@@ -69,13 +69,13 @@ main {
 
 #containerConta {
     margin-bottom: 20px;
+    font-size: 1.2em;
 }
 
 #resultadoUsuario {
     font-family: pixelFont, 'Courier New', Courier, monospace;
-    font-size: 1em;
-    line-height: 1em;
-    width: 1.5em;
+    line-height: 1.2em;
+    width: 1.6em;
     background-color: var(--branco);
     color: var(--azul);
     border: 2px solid var(--azul);
@@ -99,9 +99,9 @@ main {
 
 .num {
     display: inline-block;
-    font-size: 1.5em;
-    width: 1.5em;
-    height: 1.5em;
+    font-size: 1.7em;
+    width: 1.7em;
+    height: 1.7em;
 }
 
 .num:hover {
@@ -114,9 +114,9 @@ main {
 
 #numFake {
     display: inline-block;
-    font-size: 1.5em;
-    width: 1.5em;
-    height: 1.5em;
+    font-size: 1.7em;
+    width: 1.7em;
+    height: 1.7em;
     color: rgb(226, 226, 226)
 }
 

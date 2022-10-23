@@ -64,6 +64,11 @@ function iniciar() {
     gerarConta();
 }
 
+function digitar(i) {
+    if (i === 'x') resultadoUsuario.value = resultadoUsuario.value.slice(0, -1);
+    else resultadoUsuario.value += i;
+}
+
 let valorMax = 10;
 function gerarConta() {
     let valorAleatorio1 = Math.round(Math.random() * valorMax);
@@ -74,14 +79,10 @@ function gerarConta() {
     valor2.innerText = valorAleatorio2;
 }
 
-function digitar(i) {
-    if (i === 'x') resultadoUsuario.value = resultadoUsuario.value.slice(0, -1);
-    else resultadoUsuario.value += i;
-}
-
+let segundosAdicionais = 3
 function enviar() {
     if (Number(resultadoUsuario.value) === resultadoCorreto) {
-        tempoRestante += 3;
+        tempoRestante += segundosAdicionais;
         questaoAtual++;
         atualizarMultiplicador();
         atualizarPontos();
@@ -106,6 +107,9 @@ function atualizarPontos() {
         recorde = pontos;
         novoRecorde = true;
     }
+
+    if (pontos > 600) ativarHardcore();
+    else if (pontos > 1500) ativarUltraHardcore();
 }
 
 function atualizarTempo() {
@@ -150,6 +154,7 @@ function terminarPartida() {
 function jogarNovamente() {
     telaDerrota.style.display = 'none';
     retorno.innerHTML = '';
+    desativarHardcores();
 
     novoRecorde = false;
     primeiraPartida = false;
@@ -170,6 +175,32 @@ function jogarNovamente() {
 
 function pararJogo() {
    telaTriste.style.display = 'block';
+}
+
+function ativarHardcore() {
+    segundosAdicionais = 2;
+    valorMax = 20;
+
+    document.querySelector(':root').style.setProperty('--azulEscuro', '#941739');
+    document.querySelector(':root').style.setProperty('--azul', '#A71A40');
+    document.querySelector('#numFake').innerText = '>:D';
+}
+
+function ativarUltraHardcore() {
+    valorMax = 30;
+
+    document.querySelector(':root').style.setProperty('--azulEscuro', '#49141E');
+    document.querySelector(':root').style.setProperty('--azul', '#702523');
+    document.querySelector('#numFake').innerText = '>:(';
+}
+
+function desativarHardcores() {
+    segundosAdicionais = 3;
+    valorMax = 10;
+
+    document.querySelector(':root').style.setProperty('--azulEscuro', '#485DD9');
+    document.querySelector(':root').style.setProperty('--azul', '#5068F2');
+    document.querySelector('#numFake').innerText = ':p';
 }
 
 function ehMobile() {
