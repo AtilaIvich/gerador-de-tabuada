@@ -74,6 +74,7 @@ main {
 
 #resultadoUsuario {
     font-family: pixelFont, 'Courier New', Courier, monospace;
+    font-size: 1em;
     line-height: 1.2em;
     width: 1.6em;
     background-color: var(--branco);
