@@ -61,7 +61,7 @@ function iniciar() {
     document.addEventListener('keypress', apertouEnter);
     contadorTempo = setInterval(atualizarTempo, 1000);
     gerarConta();
-    if (!ehMobile) resultadoUsuario.focus();
+    if (!ehMobile()) resultadoUsuario.focus();
 }
 
 function digitar(i) {
@@ -79,19 +79,26 @@ function gerarConta() {
     valor2.innerText = valorAleatorio2;
 }
 
-let segundosAdicionais = 3
+let segundosAdicionais = 3;
 function enviar() {
     if (Number(resultadoUsuario.value) === resultadoCorreto) {
         tempoRestante += segundosAdicionais;
-        questaoAtual++;
+        atualizarQuestaoAtual();
         atualizarMultiplicador();
         atualizarPontos();
         resultadoUsuario.value = '';
-        if (!ehMobile) resultadoUsuario.focus();
+        if (!ehMobile()) resultadoUsuario.focus();
         gerarConta();
     } else {
         terminarPartida();
     }
+}
+
+function atualizarQuestaoAtual() {
+    questaoAtual++;
+
+    if (questaoAtual === 41) ativarHardcore();
+    else if (questaoAtual === 86) ativarUltraHardcore();
 }
 
 function atualizarMultiplicador() {
@@ -107,9 +114,6 @@ function atualizarPontos() {
         recorde = pontos;
         novoRecorde = true;
     }
-
-    if (pontos > 600) ativarHardcore();
-    else if (pontos > 1500) ativarUltraHardcore();
 }
 
 function atualizarTempo() {
@@ -168,7 +172,7 @@ function jogarNovamente() {
     botaoEnviar.addEventListener('click', enviar);
     document.addEventListener('keypress', apertouEnter);
     contadorTempo = setInterval(atualizarTempo, 1000);
-    if (!ehMobile) resultadoUsuario.focus();
+    if (!ehMobile()) resultadoUsuario.focus();
     gerarConta();
 }
 
