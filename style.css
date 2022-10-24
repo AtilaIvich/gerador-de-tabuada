@@ -12,6 +12,13 @@
     --branco: white;
 }
 
+body {
+    background-color: var(--azulEscuro);
+    font-family: pixelFont, 'Courier New', Courier, monospace;
+    text-align: center;
+    user-select: none;
+}
+
 /* Entrada do jogo */
 
 #telaInicial {
@@ -33,8 +40,7 @@
     background-color: var(--azulEscuro);
     color: var(--branco);
     font-family: pixelFont, 'Courier New', Courier, monospace;
-    font-size: 1.2em;
-    padding: 10px 20px;
+    font-size: 1.5rem;
     border: none;
     outline: none;
 }
@@ -45,14 +51,6 @@
 
 /* Jogo iniciado */
 
-body {
-    background-color: var(--azulEscuro);
-    color: var(--azul);
-    font-family: pixelFont, 'Courier New', Courier, monospace;
-    text-align: center;
-    user-select: none;
-}
-
 main {
     position: absolute;
     top: 40%;
@@ -61,20 +59,21 @@ main {
     width: clamp(300px, 50%, 700px);
     margin-top: 20px;
     padding: 30px 10px;
-    background-color: var(--branco);
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
+    background-color: var(--branco);
+    color: var(--azul);
     z-index: 0;
 }
 
 #containerConta {
     margin-bottom: 20px;
-    font-size: 1.2em;
+    font-size: 1.2rem;
 }
 
 #resultadoUsuario {
     font-family: pixelFont, 'Courier New', Courier, monospace;
-    font-size: 1em;
+    font-size: 1.2rem;
     line-height: 1.2em;
     width: 1.6em;
     background-color: var(--branco);
@@ -89,6 +88,7 @@ main {
 
 #botaoEnviar {
     font-family: pixelFont, 'Courier New', Courier, monospace;
+    font-size: 1rem;
     background-color: var(--branco);
     border: none;
     outline: none;
@@ -118,7 +118,7 @@ main {
     font-size: 1.7em;
     width: 1.7em;
     height: 1.7em;
-    color: rgb(226, 226, 226)
+    color: rgb(226, 226, 226);
 }
 
 #linha4 {
@@ -162,7 +162,7 @@ main {
 
 #containerBotoesDerrota button {
     font-family: pixelFont, 'Courier New', Courier, monospace;
-    font-size: 1.2em;
+    font-size: 1.5rem;
     background-color: var(--azulEscuro);
     color: white;
     border: none;
@@ -193,6 +193,6 @@ main {
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: var(--amarelo);
-    font-size: 4em;
+    color: var(--branco);
+    font-size: 4rem;
 }

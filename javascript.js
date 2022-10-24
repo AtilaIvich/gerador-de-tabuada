@@ -60,8 +60,8 @@ function iniciar() {
     botaoEnviar.addEventListener('click', enviar);
     document.addEventListener('keypress', apertouEnter);
     contadorTempo = setInterval(atualizarTempo, 1000);
-    if (!ehMobile) resultadoUsuario.focus();
     gerarConta();
+    if (!ehMobile) resultadoUsuario.focus();
 }
 
 function digitar(i) {
@@ -153,7 +153,6 @@ function terminarPartida() {
 
 function jogarNovamente() {
     telaDerrota.style.display = 'none';
-    retorno.innerHTML = '';
     desativarHardcores();
 
     novoRecorde = false;
@@ -204,5 +203,5 @@ function desativarHardcores() {
 }
 
 function ehMobile() {
-    return "ontouchstart" in botaoIniciar;
+    return 'ontouchstart' in botaoIniciar;
 }
