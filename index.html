@@ -9,71 +9,75 @@
         <script src="javascript.js" defer></script>
     </head>
     <body>
-        <section id="telaInicial">
-            <button id="botaoIniciar">JOGAR</button>
+      <section id="telaInicial">
+        <button id="botaoIniciar">JOGAR</button>
+      </section>
+
+      <main>
+        <h1>GERADOR DE TABUADA</h1>
+
+        <div id="containerConta">
+          <label for="resultadoUsuario" id="contaGerada">
+            <span id="valor1">&nbsp;&nbsp;</span> x <span id="valor2">&nbsp;&nbsp;</span> =
+          </label>
+          <input type="text" name="resultadoUsuario" id="resultadoUsuario">
+          <button id="botaoEnviar">ENVIAR</button>
+        </div>
+
+        <section id="teclado">
+          <div id="linha1" class="linha">
+            <div id="num1" class="num">1</div>
+            <div id="num2" class="num">2</div>
+            <div id="num3" class="num">3</div>
+          </div>
+
+          <div id="linha2" class="linha">
+            <div id="num4" class="num">4</div>
+            <div id="num5" class="num">5</div>
+            <div id="num6" class="num">6</div>
+          </div>
+
+          <div id="linha3" class="linha">
+            <div id="num7" class="num">7</div>
+            <div id="num8" class="num">8</div>
+            <div id="num9" class="num">9</div>
+          </div>
+
+          <div id="linha4" class="linha">
+            <div id="numFake">:p</div>
+            <div id="num0" class="num">0</div>
+            <div id="backspace" class="num"><-</div>
+          </div>
         </section>
 
-        <main>
-            <h1>GERADOR DE TABUADA</h1>
+        <section id="contadores">
+          <div class="contador">
+            PLACAR
+            <div id="placar">0</div>
+          </div>
 
-            <div id="containerConta">
-                <label for="resultadoUsuario" id="contaGerada"><span id="valor1">&nbsp;&nbsp;</span> x <span id="valor2">&nbsp;&nbsp;</span> =</label> <input type="text" name="resultadoUsuario" id="resultadoUsuario"> <button id="botaoEnviar">ENVIAR</button>
-            </div>
+          <div class="contador">
+            MULTIPLICADOR
+            <div id="multiplicador">1</div>
+          </div>
 
-            <section id="teclado">
-                <div id="linha1" class="linha">
-                    <div id="num1" class="num">1</div>
-                    <div id="num2" class="num">2</div>
-                    <div id="num3" class="num">3</div>
-                </div>
-
-                <div id="linha2" class="linha">
-                    <div id="num4" class="num">4</div>
-                    <div id="num5" class="num">5</div>
-                    <div id="num6" class="num">6</div>
-                </div>
-
-                <div id="linha3" class="linha">
-                    <div id="num7" class="num">7</div>
-                    <div id="num8" class="num">8</div>
-                    <div id="num9" class="num">9</div>
-                </div>
-
-                <div id="linha4" class="linha">
-                    <div id="numFake">:p</div>
-                    <div id="num0" class="num">0</div>
-                    <div id="backspace" class="num"><-</div>
-                </div>
-            </section>
-
-            <section id="contadores">
-                <div class="contador">
-                    PLACAR
-                    <div id="placar">0</div>
-                </div>
-
-                <div class="contador">
-                    MULTIPLICADOR
-                    <div id="multiplicador">1</div>
-                </div>
-
-                <div class="contador">
-                    TEMPO
-                    <div id="tempo">00:10</div>
-                </div>
-            </section>
-        </main>
-        
-        <section id="telaDerrota">
-            <p id="retorno"></p>
-            
-            <div id="containerBotoesDerrota">
-                <button id="botaoJogarNovamente">SIM</button> <button id="botaoPararJogo">NAO</button>
-            </div>
+          <div class="contador">
+            TEMPO
+            <div id="tempo">00:10</div>
+          </div>
         </section>
+      </main>
+      
+      <section id="telaDerrota">
+        <p id="retorno"></p>
+        <div id="containerBotoesDerrota">
+          <button id="botaoJogarNovamente">SIM</button>
+          <button id="botaoPararJogo">NAO</button>
+        </div>
+      </section>
 
-        <section id="telaTriste">
-            <p id="carinhaTriste">:(</p>
-        </section>
+      <section id="telaTriste">
+        <p id="carinhaTriste">:(</p>
+      </section>
     </body>
 </html>
