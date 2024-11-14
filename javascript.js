@@ -1,44 +1,28 @@
-const telaInicial = document.getElementById('telaInicial');
-const botaoIniciar = document.getElementById('botaoIniciar');
+const telaInicial = document.getElementById('tela-inicial');
+const botaoIniciar = document.getElementById('botao-iniciar');
 botaoIniciar.addEventListener('click', iniciar);
 
-const valor1 = document.getElementById('valor1');
-const valor2 = document.getElementById('valor2');
-const resultadoUsuario = document.getElementById('resultadoUsuario');
+const containerPrimeiroValor = document.getElementById('container-primeiro-valor');
+const containerSegundoValor = document.getElementById('container-segundo-valor');
+const resultadoUsuario = document.getElementById('resultado-usuario');
 const placar = document.getElementById('placar');
 const multiplicador = document.getElementById('multiplicador');
 const tempo = document.getElementById('tempo');
-const botaoEnviar = document.getElementById('botaoEnviar');
+const botaoEnviar = document.getElementById('botao-enviar');
 
-const num1 = document.getElementById('num1');
-const num2 = document.getElementById('num2');
-const num3 = document.getElementById('num3');
-const num4 = document.getElementById('num4');
-const num5 = document.getElementById('num5');
-const num6 = document.getElementById('num6');
-const num7 = document.getElementById('num7');
-const num8 = document.getElementById('num8');
-const num9 = document.getElementById('num9');
-const num0 = document.getElementById('num0');
-const backspace = document.getElementById('backspace');
+const digitos = document.getElementsByClassName('num');
 
-num1.addEventListener('click', () => digitar(1));
-num2.addEventListener('click', () => digitar(2));
-num3.addEventListener('click', () => digitar(3));
-num4.addEventListener('click', () => digitar(4));
-num5.addEventListener('click', () => digitar(5));
-num6.addEventListener('click', () => digitar(6));
-num7.addEventListener('click', () => digitar(7));
-num8.addEventListener('click', () => digitar(8));
-num9.addEventListener('click', () => digitar(9));
-num0.addEventListener('click', () => digitar(0));
-backspace.addEventListener('click', () => digitar('x'));
+for (const prop in digitos) {
+    if (typeof digitos[prop] !== 'object') continue;
 
-const telaDerrota = document.getElementById('telaDerrota');
+    digitos[prop].addEventListener('click', () => digitar(digitos[prop].id));
+}
+
+const telaDerrota = document.getElementById('tela-derrota');
 const retorno = document.getElementById('retorno');
-const botaoJogarNovamente = document.getElementById('botaoJogarNovamente');
-const botaoPararJogo = document.getElementById('botaoPararJogo');
-const telaTriste = document.getElementById('telaTriste');
+const botaoJogarNovamente = document.getElementById('botao-jogar-novamente');
+const botaoPararJogo = document.getElementById('botao-parar-jogo');
+const telaTriste = document.getElementById('tela-triste');
 
 let primeiraPartida = true;
 let novoRecorde = false;
@@ -50,6 +34,7 @@ let resultadoCorreto = undefined;
 let tempoPadrao = 10;
 let tempoRestante = tempoPadrao;
 let contadorTempo;
+
 let apertouEnter = (e) => {
     if (e.key === 'Enter') enviar();
 };
@@ -64,9 +49,9 @@ function iniciar() {
     if (!ehMobile()) resultadoUsuario.focus();
 }
 
-function digitar(i) {
-    if (i === 'x') resultadoUsuario.value = resultadoUsuario.value.slice(0, -1);
-    else resultadoUsuario.value += i;
+function digitar(digito) {
+    if (digito === 'backspace') resultadoUsuario.value = resultadoUsuario.value.slice(0, -1);
+    else resultadoUsuario.value += digito.replace('num', '');
 }
 
 let valorMax = 10;
@@ -75,8 +60,8 @@ function gerarConta() {
     let valorAleatorio2 = Math.round(Math.random() * valorMax);
     resultadoCorreto = valorAleatorio1 * valorAleatorio2;
 
-    valor1.innerText = valorAleatorio1;
-    valor2.innerText = valorAleatorio2;
+    containerPrimeiroValor.innerText = valorAleatorio1;
+    containerSegundoValor.innerText = valorAleatorio2;
 }
 
 let segundosAdicionais = 3;
@@ -138,13 +123,13 @@ function terminarPartida() {
 
     retorno.innerHTML = tempoRestante <= 0
     ? `O SEU TEMPO ACABOU<br>`
-    : `VOCE ERROU A CONTA ${valor1.innerText} x ${valor2.innerText}<br>`;
+    : `VOCE ERROU A CONTA ${containerPrimeiroValor.innerText} x ${containerSegundoValor.innerText}<br>`;
 
     if (primeiraPartida === true) {
         retorno.innerHTML += `PONTUACAO: ${pontos} PONTOS<br><br>`;
     } else {
         retorno.innerHTML += novoRecorde
-        ? `PONTUACAO: ${pontos} PONTOS<br><span style="color: var(--amarelo);">NOVO RECORDE!</span><br><br>`
+        ? `PONTUACAO: ${pontos} PONTOS<br><span style="color: var(--cor-destaque-atual);">NOVO RECORDE!</span><br><br>`
         : `PONTUACAO: ${pontos} PONTOS<br>RECORDE: ${recorde} PONTOS<br><br>`;
     }
 
@@ -180,30 +165,41 @@ function pararJogo() {
    telaTriste.style.display = 'block';
 }
 
+const cssRootGetter = getComputedStyle(document.documentElement);
+
 function ativarHardcore() {
     segundosAdicionais = 2;
     valorMax = 20;
 
-    document.querySelector(':root').style.setProperty('--azulEscuro', '#941739');
-    document.querySelector(':root').style.setProperty('--azul', '#A71A40');
-    document.querySelector('#numFake').innerText = '>:D';
+    let corFundoHardcore = cssRootGetter.getPropertyValue('--cor-fundo-hardcore');
+    let corDetalhesHardcore = cssRootGetter.getPropertyValue('--cor-detalhes-hardcore');
+
+    document.querySelector(':root').style.setProperty('--cor-fundo-atual', corFundoHardcore);
+    document.querySelector(':root').style.setProperty('--cor-detalhes-atual', corDetalhesHardcore);
+    document.querySelector('#num-fake').innerText = '>:D';
 }
 
 function ativarUltraHardcore() {
     valorMax = 30;
 
-    document.querySelector(':root').style.setProperty('--azulEscuro', '#49141E');
-    document.querySelector(':root').style.setProperty('--azul', '#702523');
-    document.querySelector('#numFake').innerText = '>:(';
+    let corFundoUltrahardcore = cssRootGetter.getPropertyValue('--cor-fundo-ultrahardcore');
+    let corDetalhesUltrahardcore = cssRootGetter.getPropertyValue('--cor-detalhes-ultrahardcore');
+
+    document.querySelector(':root').style.setProperty('--cor-fundo-atual', corFundoUltrahardcore);
+    document.querySelector(':root').style.setProperty('--cor-detalhes-atual', corDetalhesUltrahardcore);
+    document.querySelector('#num-fake').innerText = 'D:';
 }
 
 function desativarHardcores() {
     segundosAdicionais = 3;
     valorMax = 10;
 
-    document.querySelector(':root').style.setProperty('--azulEscuro', '#485DD9');
-    document.querySelector(':root').style.setProperty('--azul', '#5068F2');
-    document.querySelector('#numFake').innerText = ':p';
+    let corFundoPadrao = cssRootGetter.getPropertyValue('--cor-fundo-padrao');
+    let corDetalhesPadrao = cssRootGetter.getPropertyValue('--cor-detalhes-padrao');
+
+    document.querySelector(':root').style.setProperty('--cor-fundo-atual', corFundoPadrao);
+    document.querySelector(':root').style.setProperty('--cor-detalhes-atual', corDetalhesPadrao);
+    document.querySelector('#num-fake').innerText = ':p';
 }
 
 function ehMobile() {
