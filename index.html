@@ -9,44 +9,44 @@
         <script src="javascript.js" defer></script>
     </head>
     <body>
-      <section id="telaInicial">
-        <button id="botaoIniciar">JOGAR</button>
+      <section id="tela-inicial">
+        <button id="botao-iniciar">JOGAR</button>
       </section>
 
       <main>
         <h1>GERADOR DE TABUADA</h1>
 
-        <div id="containerConta">
-          <label for="resultadoUsuario" id="contaGerada">
-            <span id="valor1">&nbsp;&nbsp;</span> x <span id="valor2">&nbsp;&nbsp;</span> =
+        <div id="container-conta">
+          <label for="resultado-usuario" id="conta-gerada">
+            <span id="container-primeiro-valor">&nbsp;&nbsp;</span> x <span id="container-segundo-valor">&nbsp;&nbsp;</span> =
           </label>
-          <input type="text" name="resultadoUsuario" id="resultadoUsuario">
-          <button id="botaoEnviar">ENVIAR</button>
+          <input type="text" name="resultado-usuario" id="resultado-usuario">
+          <button id="botao-enviar">ENVIAR</button>
         </div>
 
         <section id="teclado">
-          <div id="linha1" class="linha">
-            <div id="num1" class="num">1</div>
-            <div id="num2" class="num">2</div>
-            <div id="num3" class="num">3</div>
+          <div class="linha">
+            <div class="num" data-value="1">1</div>
+            <div class="num" data-value="2">2</div>
+            <div class="num" data-value="3">3</div>
           </div>
 
-          <div id="linha2" class="linha">
-            <div id="num4" class="num">4</div>
-            <div id="num5" class="num">5</div>
-            <div id="num6" class="num">6</div>
+          <div class="linha">
+            <div class="num" data-value="4">4</div>
+            <div class="num" data-value="5">5</div>
+            <div class="num" data-value="6">6</div>
           </div>
 
-          <div id="linha3" class="linha">
-            <div id="num7" class="num">7</div>
-            <div id="num8" class="num">8</div>
-            <div id="num9" class="num">9</div>
+          <div class="linha">
+            <div class="num" data-value="7">7</div>
+            <div class="num" data-value="8">8</div>
+            <div class="num" data-value="9">9</div>
           </div>
 
-          <div id="linha4" class="linha">
-            <div id="numFake">:p</div>
-            <div id="num0" class="num">0</div>
-            <div id="backspace" class="num"><-</div>
+          <div class="linha">
+            <div id="emoticon-teclado">:p</div>
+            <div class="num" data-value="0">0</div>
+            <div class="num" data-value="backspace"><-</div>
           </div>
         </section>
 
@@ -68,16 +68,16 @@
         </section>
       </main>
       
-      <section id="telaDerrota">
+      <section id="tela-derrota">
         <p id="retorno"></p>
-        <div id="containerBotoesDerrota">
-          <button id="botaoJogarNovamente">SIM</button>
-          <button id="botaoPararJogo">NAO</button>
+        <div id="container-botoes-derrota">
+          <button id="botao-jogar-novamente">SIM</button>
+          <button id="botao-parar-jogo">NAO</button>
         </div>
       </section>
 
-      <section id="telaTriste">
-        <p id="carinhaTriste">:(</p>
+      <section id="tela-triste">
+        <p id="carinha-triste">:(</p>
       </section>
     </body>
 </html>
