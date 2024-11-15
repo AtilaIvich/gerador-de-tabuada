@@ -8,20 +8,21 @@
 :root {
     --cor-fundo-atual: #485DD9;
     --cor-detalhes-atual: #5068F2;
-    --cor-destaque-atual: #f2bc27;
+    --cor-destaque-atual: #fad504;
     --cor-fundo-padrao: #485DD9;
     --cor-detalhes-padrao: #5068F2;
-    --cor-destaque-padrao: #f2bc27;
-    --cor-fundo-hardcore: #e00d42;
-    --cor-detalhes-hardcore: #ec0b43;
+    --cor-destaque-padrao: #fad504;
+    --cor-fundo-hardcore: #dd0025;
+    --cor-detalhes-hardcore: #e72545;
     --cor-fundo-ultrahardcore: #222222;
     --cor-detalhes-ultrahardcore: #333333;
-    --branco: white;
+    --branco: #f1f1f1;
 }
 
 body {
     background-color: var(--cor-fundo-atual);
     font-family: pixelFont, 'Courier New', Courier, monospace;
+    text-transform: uppercase;
     text-align: center;
     user-select: none;
 }
@@ -110,17 +111,14 @@ main {
     font-size: 1.7em;
     width: 1.7em;
     height: 1.7em;
-}
-
-.num:hover {
-    background-color: rgb(247, 247, 247);
+    border-radius: 5px;
 }
 
 .num:active {
-    background-color: rgb(237, 237, 237);
+    background-color: #ededed;
 }
 
-#num-fake {
+#emoticon-teclado {
     display: inline-block;
     font-size: 1.7em;
     width: 1.7em;
@@ -128,8 +126,8 @@ main {
     color: #d8d8d8;
 }
 
-#linha4 {
-    margin-bottom: 20px;
+.linha:last-child {
+    margin-bottom:20px;
 }
 
 .contador {

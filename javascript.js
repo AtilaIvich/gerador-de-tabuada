@@ -10,13 +10,11 @@ const multiplicador = document.getElementById('multiplicador');
 const tempo = document.getElementById('tempo');
 const botaoEnviar = document.getElementById('botao-enviar');
 
-const digitos = document.getElementsByClassName('num');
+const botoesNumericos = document.getElementsByClassName('num');
 
-for (const prop in digitos) {
-    if (typeof digitos[prop] !== 'object') continue;
-
-    digitos[prop].addEventListener('click', () => digitar(digitos[prop].id));
-}
+Array.from(botoesNumericos).forEach(botao => {
+    botao.addEventListener('click', () => digitar(botao.dataset.value));
+});
 
 const telaDerrota = document.getElementById('tela-derrota');
 const retorno = document.getElementById('retorno');
@@ -24,15 +22,17 @@ const botaoJogarNovamente = document.getElementById('botao-jogar-novamente');
 const botaoPararJogo = document.getElementById('botao-parar-jogo');
 const telaTriste = document.getElementById('tela-triste');
 
+const tempoPadrao = 10;
+let tempoRestante = tempoPadrao;
 let primeiraPartida = true;
 let novoRecorde = false;
 let questaoAtual = 1;
 let pontos = 0;
 let recorde = 0;
 let valorMultiplicador = 1;
+let valorMaxTabuada = 10;
+let segundosAdicionais = 3;
 let resultadoCorreto = undefined;
-let tempoPadrao = 10;
-let tempoRestante = tempoPadrao;
 let contadorTempo;
 
 let apertouEnter = (e) => {
@@ -49,22 +49,23 @@ function iniciar() {
     if (!ehMobile()) resultadoUsuario.focus();
 }
 
-function digitar(digito) {
-    if (digito === 'backspace') resultadoUsuario.value = resultadoUsuario.value.slice(0, -1);
-    else resultadoUsuario.value += digito.replace('num', '');
+function digitar(botaoPressionado) {
+    if (botaoPressionado !== 'backspace' && isNaN(botaoPressionado)) throw new Error('Input inválido');
+
+    if (botaoPressionado === 'backspace') resultadoUsuario.value = resultadoUsuario.value.slice(0, -1);
+    else resultadoUsuario.value += botaoPressionado;
 }
 
-let valorMax = 10;
 function gerarConta() {
-    let valorAleatorio1 = Math.round(Math.random() * valorMax);
-    let valorAleatorio2 = Math.round(Math.random() * valorMax);
+    let valorAleatorio1 = Math.round(Math.random() * valorMaxTabuada);
+    let valorAleatorio2 = Math.round(Math.random() * valorMaxTabuada);
     resultadoCorreto = valorAleatorio1 * valorAleatorio2;
 
     containerPrimeiroValor.innerText = valorAleatorio1;
     containerSegundoValor.innerText = valorAleatorio2;
 }
 
-let segundosAdicionais = 3;
+
 function enviar() {
     if (Number(resultadoUsuario.value) === resultadoCorreto) {
         tempoRestante += segundosAdicionais;
@@ -83,7 +84,7 @@ function atualizarQuestaoAtual() {
     questaoAtual++;
 
     if (questaoAtual === 41) ativarHardcore();
-    else if (questaoAtual === 86) ativarUltraHardcore();
+    else if (questaoAtual === 86) ativarUltrahardcore();
 }
 
 function atualizarMultiplicador() {
@@ -122,18 +123,18 @@ function terminarPartida() {
     resultadoUsuario.value = '';
 
     retorno.innerHTML = tempoRestante <= 0
-    ? `O SEU TEMPO ACABOU<br>`
-    : `VOCE ERROU A CONTA ${containerPrimeiroValor.innerText} x ${containerSegundoValor.innerText}<br>`;
+    ? `o seu tempo acabou<br>`
+    : `voce errou a conta ${containerPrimeiroValor.innerText} x ${containerSegundoValor.innerText}<br>`;
 
     if (primeiraPartida === true) {
-        retorno.innerHTML += `PONTUACAO: ${pontos} PONTOS<br><br>`;
+        retorno.innerHTML += `pontuacao: ${pontos} pontos<br><br>`;
     } else {
         retorno.innerHTML += novoRecorde
-        ? `PONTUACAO: ${pontos} PONTOS<br><span style="color: var(--cor-destaque-atual);">NOVO RECORDE!</span><br><br>`
-        : `PONTUACAO: ${pontos} PONTOS<br>RECORDE: ${recorde} PONTOS<br><br>`;
+        ? `pontuacao: ${pontos} pontos<br><span style="color: var(--cor-destaque-atual);">novo recorde!</span><br><br>`
+        : `pontuacao: ${pontos} pontos<br>recorde: ${recorde} pontos<br><br>`;
     }
 
-    retorno.innerHTML += `DESEJA JOGAR NOVAMENTE?`;
+    retorno.innerHTML += `deseja jogar novamente?`;
     telaDerrota.style.display = 'block';
 
     botaoJogarNovamente.addEventListener('click', jogarNovamente);
@@ -165,41 +166,42 @@ function pararJogo() {
    telaTriste.style.display = 'block';
 }
 
-const cssRootGetter = getComputedStyle(document.documentElement);
-
 function ativarHardcore() {
     segundosAdicionais = 2;
-    valorMax = 20;
+    valorMaxTabuada = 20;
 
-    let corFundoHardcore = cssRootGetter.getPropertyValue('--cor-fundo-hardcore');
-    let corDetalhesHardcore = cssRootGetter.getPropertyValue('--cor-detalhes-hardcore');
-
-    document.querySelector(':root').style.setProperty('--cor-fundo-atual', corFundoHardcore);
-    document.querySelector(':root').style.setProperty('--cor-detalhes-atual', corDetalhesHardcore);
-    document.querySelector('#num-fake').innerText = '>:D';
+    atualizarTema('hardcore');
 }
 
-function ativarUltraHardcore() {
-    valorMax = 30;
+function ativarUltrahardcore() {
+    valorMaxTabuada = 30;
 
-    let corFundoUltrahardcore = cssRootGetter.getPropertyValue('--cor-fundo-ultrahardcore');
-    let corDetalhesUltrahardcore = cssRootGetter.getPropertyValue('--cor-detalhes-ultrahardcore');
-
-    document.querySelector(':root').style.setProperty('--cor-fundo-atual', corFundoUltrahardcore);
-    document.querySelector(':root').style.setProperty('--cor-detalhes-atual', corDetalhesUltrahardcore);
-    document.querySelector('#num-fake').innerText = 'D:';
+    atualizarTema('ultrahardcore');
 }
 
 function desativarHardcores() {
     segundosAdicionais = 3;
-    valorMax = 10;
+    valorMaxTabuada = 10;
 
-    let corFundoPadrao = cssRootGetter.getPropertyValue('--cor-fundo-padrao');
-    let corDetalhesPadrao = cssRootGetter.getPropertyValue('--cor-detalhes-padrao');
+    atualizarTema('padrao');
+}
 
-    document.querySelector(':root').style.setProperty('--cor-fundo-atual', corFundoPadrao);
-    document.querySelector(':root').style.setProperty('--cor-detalhes-atual', corDetalhesPadrao);
-    document.querySelector('#num-fake').innerText = ':p';
+function atualizarTema(modo) {
+    if (!['padrao', 'hardcore', 'ultrahardcore'].includes(modo)) throw new Error('Modo de cor inválido');
+
+    let corFundo = getComputedStyle(document.documentElement).getPropertyValue(`--cor-fundo-${modo}`);
+    let corDetalhes = getComputedStyle(document.documentElement).getPropertyValue(`--cor-detalhes-${modo}`);
+
+    document.querySelector(':root').style.setProperty('--cor-fundo-atual', corFundo);
+    document.querySelector(':root').style.setProperty('--cor-detalhes-atual', corDetalhes);
+
+    const emoticons = {
+        padrao: ':p',
+        hardcore: '>:D',
+        ultrahardcore: 'D:'
+    };
+
+    document.querySelector('#emoticon-teclado').innerText = emoticons[modo];
 }
 
 function ehMobile() {
